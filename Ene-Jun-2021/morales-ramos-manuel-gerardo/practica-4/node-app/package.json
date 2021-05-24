@@ -1,0 +1,16 @@
+{
+  "name": "practica-4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.12.10",
+    "xml2js": "^0.4.23"
+  }
+}

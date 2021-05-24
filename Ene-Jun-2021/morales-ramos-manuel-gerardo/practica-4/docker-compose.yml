@@ -1,0 +1,46 @@
+version: '3.9'
+
+services: 
+    
+    mongo_db:
+        image: mongo
+        restart: always
+        container_name: mongo_db
+        networks: 
+            - app
+        ports: 
+            - 27017:27017
+    
+    dbms:
+        image: mongo-express
+        restart: always
+        ports: 
+            - 8081:8081
+        environment:
+            ME_CONFIG_MONGODB_SERVER: mongo_db
+            ME_CONFIG_BASICAUTH_USERNAME: das-sistemas
+            ME_CONFIG_BASICAUTH_PASSWORD: practica-4-2021!
+        container_name: mongo_dbms
+        networks: 
+            - app
+        depends_on: 
+            - mongo_db
+    
+    node:
+        build: ./node-app
+        networks: 
+            - app
+        depends_on: 
+            - mongo_db
+
+    api:
+        build: ./api
+        ports: 
+            - 7777:7777
+        container_name: pyapp
+        depends_on: 
+            - mongo_db
+        restart: always
+        
+networks: 
+    app:
